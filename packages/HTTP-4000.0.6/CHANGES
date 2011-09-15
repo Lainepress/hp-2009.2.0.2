@@ -1,0 +1,31 @@
+Version 4004.0.6: release 2009-04-21; changes from 4004.0.5
+
+ * Patch release.
+ * Network.Browser: use HTTP.HandleStream.sendHTTP_notify, not HTTP.sendHTTP_notify
+   when issuing requests. The latter runs the risk of undoing request normalization.
+ * Network.HTTP.Base.normalizeRequest: when normalizing proxy-bound requests,
+   insert a Host: header if none present. Set it to the destination server authority,
+   not the proxy.
+ * Network.Browser: don't fail on seeing invalid cookie values, but report them
+   as errors and continue.
+
+Version 4004.0.5: release 2009-03-30; changes from 4004.0.4
+
+ * Get serious about comments and Haddock documentation.
+ * Cleaned up normalization of requests, fixing bugs and bringing together
+   previous disparate attempts at handling this.
+ * RequestMethod now supports custom verbs; use the (Custom String) constructor
+ * Beef up Network.HTTP.Base's support for normalizing requests and URIs:
+ 
+    * added splitRequestURI which divides a URI into two; the Authority portion
+      (as a String) and the input URI sans the authority portion. Useful when
+      wanting to split up a request's URI into its Host: and abs_path pieces.
+    * added normalizeRequest :: Bool -> Request ty -> Request ty, which 
+      fixes up a requests URI path and Host: info depending on whether it is
+      destined for a proxy or not (controlled by the Bool.)
+    * moved defaultRequest, defaultRequest_, libUA from Network.Browser
+      to Network.HTTP.Base
+    * added mkRequest :: RequestMethod -> URI -> Bool -> Request ty
+      for constructing normalized&sane Request bases on top of which
+      you can add custom headers, body payload etc.
+
