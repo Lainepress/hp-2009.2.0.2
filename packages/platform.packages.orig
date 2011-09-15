@@ -1,6 +1,8 @@
 mtl-1.1.0.2
 happy-1.18.4
 HUnit-1.2.0.3
+OpenGL-2.2.1.1
+GLUT-2.1.1.2
 QuickCheck-1.2.0.0
 alex-2.3.1
 editline-0.2.1.0
